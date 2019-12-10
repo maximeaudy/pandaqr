@@ -5,8 +5,11 @@ import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.HorizontalAlignment;
+import com.itextpdf.layout.property.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pandaqr.modele.Room;
@@ -48,10 +51,12 @@ public class RoomService {
         // Creating a Document
         Document document = new Document(pdfDoc);
         for (Room room : rooms) {
+            Paragraph para = new Paragraph();
+            para.setVerticalAlignment(VerticalAlignment.MIDDLE);
+            para.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            para.setBorder(new SolidBorder(3));
             String para1 = "Salle " + room.getCode();
-
-            // Creating Paragraphs
-            Paragraph paragraph1 = new Paragraph(para1);
+            para.add(para1);
             // Creating an ImageData object
             String imFile = String.format("https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:8085/pandaqr?room=%d&size=100x100&color=c54f4f&format=jpg", room.getId());
             ImageData data = ImageDataFactory.create(imFile);
@@ -60,9 +65,9 @@ public class RoomService {
             Image image = new Image(data);
 
             // Adding image to the document
-            document.add(image);
+            para.add(image);
             // Adding paragraphs to document
-            document.add(paragraph1);
+            document.add(para);
         }
 
         // Closing the document

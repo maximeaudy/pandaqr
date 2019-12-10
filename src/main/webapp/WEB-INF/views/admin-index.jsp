@@ -18,11 +18,13 @@
         <tr>
             <td>Sélection</td>
             <td>Code</td>
+            <td>Options</td>
         </tr>
         <c:forEach items="${rooms}" var="room">
             <tr>
                 <td><input type="checkbox" value="${room.id}" name="room-items"></td>
                 <td>Salle ${room.code}</td>
+                <td><a href="admin/room?id=${room.id}">Voir plus</a></td>
             </tr>
         </c:forEach>
     </table>
