@@ -1,5 +1,6 @@
 # fichiers maven a ignorer
 target
+pizza-spring.iml
 
 # fichiers Eclipse a ignorer
 .classpath
