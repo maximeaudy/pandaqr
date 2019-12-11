@@ -7,17 +7,18 @@ import java.io.IOException;
 
 
 public class iCal {
-	private String version = "VERSION:1.0 \n";
-	private String prodid = "PRODID://Elara/lofy/tanare/delp/314sum2015//\n";
-	private String calBegin = "BEGIN:VCALENDAR \n";
+	private static String version = "VERSION:2.0 \n";
+	private static String prodid = "PRODID://Elara/lofy/tanare/delp/314sum2015//\n";
+	private static String calBegin = "BEGIN:VCALENDAR \n";
 	private String calEnd = "END:VCALENDAR \n";
 	private String eventBegin = "BEGIN:VEVENT \n";
 	private String eventEnd = "END:VEVENT \n";
 	static final String NL = "\r\n";
+
 	public iCal() {
 	}
 
-	public void write( String name ){
+	public static void write( String name ){
 		StringBuilder builder = new StringBuilder();
 		builder.append(name);
 		builder.append(".ics");
