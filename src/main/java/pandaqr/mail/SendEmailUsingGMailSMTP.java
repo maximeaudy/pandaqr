@@ -10,6 +10,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import pandaqr.calendar.iCal;
+
 public class SendEmailUsingGMailSMTP {
    public static void main(String[] args) {
       // Recipient's email ID needs to be mentioned.
@@ -38,8 +40,8 @@ public class SendEmailUsingGMailSMTP {
          }
       });
 
-      try {
-         // Create a default MimeMessage object.
+      try { 	  
+    	 // Create a default MimeMessage object.
          Message message = new MimeMessage(session);
 
          // Set From: header field of the header.
@@ -51,10 +53,9 @@ public class SendEmailUsingGMailSMTP {
 
          // Set Subject: header field
          message.setSubject("Invitation à la réunion");
-         Calendar cal = Calendar.getInstance();
-         cal.set(2019, 11, 10);
+
          // Now set the actual message
-         message.setText("Vous avez été invité à la réunion de $michel pour le 11/12/2019 à 15h15. "+ cal.toString() );
+         message.setText("Vous avez été invité à la réunion de $michel pour le 11/12/2019 à 15h15. ");
 
          // Send message
          Transport.send(message);
@@ -65,4 +66,5 @@ public class SendEmailUsingGMailSMTP {
             throw new RuntimeException(e);
       }
    }
+   
 }
