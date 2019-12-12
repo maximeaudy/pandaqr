@@ -2,6 +2,7 @@ package pandaqr.service;
 
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -11,13 +12,16 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.stereotype.Service;
 import pandaqr.modele.Room;
 import pandaqr.repository.RoomRepository;
 
 import java.io.FileNotFoundException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,7 +33,7 @@ public class RoomService {
         return roomRepository.getRooms();
     }
 
-    public String getPdf(List<String> roomIds) throws FileNotFoundException, MalformedURLException {
+    public OutputStream getPdf(List<String> roomIds) throws FileNotFoundException, MalformedURLException {
         List<Room> rooms = new ArrayList<>();
         for (String roomId: roomIds) {
             rooms.add(this.roomRepository.find(Long.parseLong(roomId)));
@@ -37,10 +41,9 @@ public class RoomService {
         return this.createPdf(rooms);
     }
 
-    private String createPdf(List<Room> rooms) throws FileNotFoundException, MalformedURLException {
-        // Creating a PdfWriter
-        String dest = "D:\\Nouveau dossier\\Cours\\B3\\JavaEE\\pdf.pdf";
-        PdfWriter writer = new PdfWriter(dest);
+    private OutputStream createPdf(List<Room> rooms) throws FileNotFoundException, MalformedURLException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PdfWriter writer = new PdfWriter(baos);
 
         // Creating a PdfDocument
         PdfDocument pdfDoc = new PdfDocument(writer);
@@ -72,6 +75,13 @@ public class RoomService {
 
         // Closing the document
         document.close();
-        return "PDF Created";
+        return baos;
+    }
+
+    public Room findRoom(String id) {
+        return roomRepository.find(Long.parseLong(id));
+    }
+    public Room findRoom(String id, Date day) {
+        return roomRepository.find(Long.parseLong(id), day);
     }
 }
