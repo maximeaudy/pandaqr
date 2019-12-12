@@ -10,3 +10,5 @@ pizza-spring.iml
 # fichiers Itellij IDEA a ignorer
 .idea
 *.iml
+
+src/main/resources/jdbc.properties
