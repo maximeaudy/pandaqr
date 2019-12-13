@@ -28,16 +28,17 @@ import java.util.List;
 import java.util.Locale;
 
 @Controller
+@RequestMapping("admin")
 public class AdminController {
     @Autowired
     private RoomService roomService;
 
-    @GetMapping({"/admin"})
+    @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("rooms", roomService.getRooms());
         return "admin-index";
     }
-    @PostMapping({"/admin"})
+    @PostMapping("/index")
     protected void createPdf(HttpServletRequest request, HttpServletResponse response, @RequestParam("room-items") List<String> roomIds)
             throws ServletException, IOException {
         ByteArrayOutputStream byteArrayOutputStream = (ByteArrayOutputStream) roomService.getPdf(roomIds);
@@ -56,14 +57,14 @@ public class AdminController {
         os.flush();
         os.close();
     }
-    @PostMapping("/admin/{id}")
+    @PostMapping("/index/{id}")
     public String infoByDate(@RequestParam("day") String day, @PathVariable String id, Model model) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", new Locale("fr", "FR"));
         model.addAttribute("room", roomService.findRoom(id, formatter.parse(day)));
         return "admin-room-info";
     }
 
-    @GetMapping({"/admin/{id}"})
+    @GetMapping("/index/{id}")
     public String index(Model model, @PathVariable String id) {
         model.addAttribute("room", roomService.findRoom(id));
         return "admin-room-info";
