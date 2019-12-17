@@ -4,9 +4,10 @@
 <html>
   <head>
   	<meta charset="UTF-8">
-    <title>Pizza Spring</title>
+    <title>Booking Rooms Coworking</title>
   </head>
   <body>
-  	<a href="<c:url value="/commande"/>">Commander</a>  
+    	<p><a href="<c:url value="/admin"/>">Administration</a></p>  
+   		<p><a href="<c:url value="/booking"/>">Réserver une salle</a></p>  
   </body>
 </html>
