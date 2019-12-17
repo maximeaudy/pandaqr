@@ -7,6 +7,7 @@ public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String email;
     @ManyToOne
     private Booking booking;
