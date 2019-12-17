@@ -35,6 +35,7 @@ public class AdminController {
 
     @GetMapping("/index")
     public String index(Model model) {
+
         model.addAttribute("rooms", roomService.getRooms());
         return "admin-index";
     }
