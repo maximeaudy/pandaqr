@@ -1,6 +1,7 @@
 package pandaqr.modele;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Participant {
@@ -11,6 +12,19 @@ public class Participant {
     private String email;
     @ManyToOne
     private Booking booking;
+
+    public Participant(String email) {
+        this.email = email;
+    }
+
+    public Participant(String email, Booking booking) {
+        this.email = email;
+        this.booking = booking;
+    }
+
+    public Participant() {
+
+    }
 
     public String getEmail() {
         return email;

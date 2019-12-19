@@ -10,7 +10,7 @@
 <body>
 <div>
 	Vous avez bien réservé la salle <c:out value="${booking.room.code}"/> 
-	pour le créneau de <fmt:formatDate value="${booking.start_time}" type="date" dateStyle="long"/> à <fmt:formatDate value="${booking.end_date}" type="date" dateStyle="long"/>.
+	pour le créneau du <fmt:formatDate value="${booking.start_time}" type="both" dateStyle="long"/> au <fmt:formatDate value="${booking.end_time}" type="both" dateStyle="long"/>.
 </div>
 <div>
 	<c:url value="/" var="accueil"/>

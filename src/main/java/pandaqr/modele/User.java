@@ -1,6 +1,7 @@
 package pandaqr.modele;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -12,6 +13,8 @@ public class User {
 	private String phone;
     @Column(name = "is_admin")
 	private boolean isAdmin;
+    @OneToMany
+    private List<Booking> bookings;
 
 	public Long getId() {
 		return id;
@@ -43,4 +46,12 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
 }

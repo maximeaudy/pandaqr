@@ -1,14 +1,10 @@
 package pandaqr.modele;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
@@ -30,7 +26,7 @@ public class Booking {
 	private Date end_time;
 	@OneToOne
 	private Room room;
-	@OneToOne
+	@ManyToOne
 	private User user;
 	@OneToMany(fetch = FetchType.EAGER) @Cascade(CascadeType.PERSIST)
     @JoinColumn(name = "booking_id")
@@ -46,6 +42,7 @@ public class Booking {
 		this.booking_date = new Date();
 		this.start_time = start_time;
 		this.end_time = end_time;
+		this.participants = new ArrayList<Participant>();
 	}
 
 	public Long getId() {

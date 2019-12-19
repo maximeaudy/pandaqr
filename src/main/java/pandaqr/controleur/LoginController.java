@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
-    @GetMapping({"/", "/connection"})
+    @GetMapping({"/connection"})
     @PostMapping("/j_security_check")
     public String login() {
         return "connection";

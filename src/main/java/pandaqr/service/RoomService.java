@@ -61,7 +61,7 @@ public class RoomService {
             String para1 = "Salle " + room.getCode();
             para.add(para1);
             // Creating an ImageData object
-            String imFile = String.format("https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:8085/pandaqr?room=%d&size=100x100&color=c54f4f&format=jpg", room.getId());
+            String imFile = "https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:8085/pandaqr/booking/" + room.getCode() + "&size=100x100&color=c54f4f&format=jpg";
             ImageData data = ImageDataFactory.create(imFile);
 
             // Creating an Image object

@@ -9,34 +9,36 @@ import javax.validation.constraints.Size;
 public class BookingDto {
 	
 	@NotNull(message = "Vous devez renseigner la date du début de la réservation !")
-	private Date start_time;
+	private String start_date;
+	private String start_time;
 
 	@NotNull(message = "Vous devez renseigner la date de fin de la réservation !")
-	private Date end_time;
-	
+	private String end_date;
+	private String end_time;
+
 	@NotNull(message = "Vous devez renseigner un nom pour la réservation !")
 	@Size(min = 1, message = "Vous devez renseigner un nom pour la réservation !")
 	private String name;
 
 	@NotNull(message = "Vous devez renseigner une description pour la réservation !")
-	@Min(value = 1, message= "Vous devez renseigner une description pour la réservation !")
+	@Size(min = 1, message= "Vous devez renseigner une description pour la réservation !")
 	private String description;
 	
 	private String participants;
 
-	public Date getStart_time() {
+	public String getStart_time() {
 		return start_time;
 	}
 
-	public void setStart_time(Date start_time) {
+	public void setStart_time(String start_time) {
 		this.start_time = start_time;
 	}
 
-	public Date getEnd_time() {
+	public String getEnd_time() {
 		return end_time;
 	}
 
-	public void setEnd_time(Date end_time) {
+	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
 	}
 
@@ -62,6 +64,22 @@ public class BookingDto {
 
 	public void setParticipants(String participants) {
 		this.participants = participants;
+	}
+
+	public String getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+
+	public String getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
 	}
 	/*
 	public boolean participantsFormatValidated(String participants) {

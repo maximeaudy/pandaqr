@@ -27,6 +27,14 @@ public class RoomRepository {
             return null;
         return rooms.get(0);
     }
+    public Room find(String roomCode) {
+        List<Room> rooms = this.em.createQuery("select r from Room r where r.code = :roomCode", Room.class)
+                .setParameter("roomCode", roomCode)
+                .getResultList();
+        if(rooms.size() == 0)
+            return null;
+        return rooms.get(0);
+    }
     public Room find(Long roomId, Date day) {
         Calendar endDay = Calendar.getInstance();
         endDay.setTime(day);
