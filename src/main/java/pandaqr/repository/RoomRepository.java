@@ -20,7 +20,7 @@ public class RoomRepository {
     }
 
     public Room find(Long roomId) {
-        List<Room> rooms = this.em.createQuery("select r from Room r left join r.bookings where r.id = :id", Room.class)
+        List<Room> rooms = this.em.createQuery("select r from Room r left join r.bookings b where r.id = :id and b.end_time > current_date ", Room.class)
                 .setParameter("id", roomId)
                 .getResultList();
         if(rooms.size() == 0)

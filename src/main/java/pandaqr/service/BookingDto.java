@@ -9,11 +9,17 @@ import javax.validation.constraints.Size;
 public class BookingDto {
 	
 	@NotNull(message = "Vous devez renseigner la date du début de la réservation !")
+	@Size(min = 1, message = "Vous devez renseigner un nom pour la réservation !")
 	private String start_date;
+	@NotNull(message = "Vous devez renseigner l'heure du début de la réservation !")
+	@Size(min = 1, message = "Vous devez renseigner un nom pour la réservation !")
 	private String start_time;
 
 	@NotNull(message = "Vous devez renseigner la date de fin de la réservation !")
+	@Size(min = 1, message = "Vous devez renseigner un nom pour la réservation !")
 	private String end_date;
+	@NotNull(message = "Vous devez renseigner l'heure de fin de la réservation !")
+	@Size(min = 1, message = "Vous devez renseigner un nom pour la réservation !")
 	private String end_time;
 
 	@NotNull(message = "Vous devez renseigner un nom pour la réservation !")

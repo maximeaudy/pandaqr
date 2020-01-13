@@ -24,7 +24,7 @@
             <tr>
                 <td><input type="checkbox" value="${room.id}" name="room-items"></td>
                 <td>Salle ${room.code}</td>
-                <td><a href="admin/${room.id}">Voir plus</a></td>
+                <td><a href="${room.id}">Voir plus</a></td>
             </tr>
         </c:forEach>
     </table>

@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import pandaqr.modele.Booking;
 import pandaqr.modele.Room;
-import pandaqr.service.BookingDto;
-import pandaqr.service.BookingService;
-import pandaqr.service.FormatParticipantsEmailException;
-import pandaqr.service.RoomService;
+import pandaqr.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -39,16 +36,17 @@ public class BookingController {
 	}
 
 	@PostMapping("/booking")
-	public String book(@Validated @ModelAttribute BookingDto bookingDto, @RequestParam String roomCode, BindingResult bindingResult, Model model, HttpServletRequest httpRequest) {
+	public String book(@Validated BookingDto bookingDto, @RequestParam String roomCode, BindingResult bindingResult, Model model, HttpServletRequest httpRequest) {
 		String email = httpRequest.getUserPrincipal().getName();
 		if (bindingResult.hasErrors()) {
+            model.addAttribute("booking", bookingDto);
 			return "booking-forms";
 		}
 		try {
 			Booking booking = bookingService.book(bookingDto, email, roomCode);
 			model.addAttribute("booking", booking);
 			return "booking-summary";
-		} catch (FormatParticipantsEmailException | ParseException e) {
+		} catch (FormatParticipantsEmailException | ParseException | DateNotFreeException e) {
 			bindingResult.addError(new FieldError("bookingDto", "participants", e.getMessage()));
 			return "booking-forms";
 		}
