@@ -123,6 +123,7 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES (2,'alexis','alexis.heroin@epsi.fr','0123456789',1,'123');
+INSERT INTO `user` VALUES (3,'user','user@user.fr','0123456789',1,'123');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,6 +149,7 @@ CREATE TABLE `user_roles` (
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
 INSERT INTO `user_roles` VALUES (2,'admin','alexis.heroin@epsi.fr');
+INSERT INTO `user_roles` VALUES (3,'user','user@user.fr');
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
