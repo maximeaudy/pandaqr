@@ -10,6 +10,7 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import pandaqr.service.RoomService;
 
 import javax.servlet.ServletException;
@@ -40,9 +41,9 @@ public class AdminController {
         return "admin-index";
     }
     @PostMapping("/")
-    protected void createPdf(HttpServletRequest request, HttpServletResponse response, @RequestParam("room-items") List<String> roomIds)
+    protected void createPdf(HttpServletRequest request, HttpServletResponse response, @RequestParam("room-items") List<String> roomIds, UriComponentsBuilder uriComponentsBuilder)
             throws ServletException, IOException {
-        ByteArrayOutputStream byteArrayOutputStream = (ByteArrayOutputStream) roomService.getPdf(roomIds);
+        ByteArrayOutputStream byteArrayOutputStream = (ByteArrayOutputStream) roomService.getPdf(roomIds, uriComponentsBuilder);
         // setting some response headers
         response.setHeader("Expires", "0");
         response.setHeader("Cache-Control",
