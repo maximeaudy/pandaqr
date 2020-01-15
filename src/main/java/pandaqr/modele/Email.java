@@ -35,7 +35,7 @@ public class Email {
         }
     }*/
 
-    public void send(String listParticipants, String titre, String description, String dateDebut,String dateFin,String mailOrganisateur,int numSalle) throws Exception {
+    public void send(String listParticipants, String titre, String description, String dateDebut,String dateFin,String mailOrganisateur,String numSalle)  {
 
         try {
             String from = "pandaqr1@gmail.com";
@@ -144,7 +144,7 @@ public class Email {
 
             // send message
             Transport.send(message);
-            System.out.println("email envoyé");
+            //System.out.println("email envoyé");
         } catch (MessagingException me) {
             me.printStackTrace();
         } catch (Exception ex) {

@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import pandaqr.modele.Booking;
+import pandaqr.modele.Email;
 import pandaqr.modele.Room;
 import pandaqr.service.*;
 
@@ -45,6 +46,8 @@ public class BookingController {
 		try {
 			Booking booking = bookingService.book(bookingDto, email, roomCode);
 			model.addAttribute("booking", booking);
+			Email e = new Email();
+			e.send(bookingDto.getParticipants(),bookingDto.getName(),bookingDto.getDescription(),bookingDto.getStart_date()+bookingDto.getStart_time(),bookingDto.getEnd_date(),"pandaqr1@gmail.com",roomCode);
 			return "booking-summary";
 		} catch (FormatParticipantsEmailException | ParseException | DateNotFreeException e) {
 			bindingResult.addError(new FieldError("bookingDto", "participants", e.getMessage()));
