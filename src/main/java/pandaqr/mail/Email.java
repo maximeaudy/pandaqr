@@ -12,9 +12,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-
-import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
-
 //import pandaqr.calendar.gmail;
 
 public class Email {
@@ -24,11 +21,8 @@ public class Email {
 	private int numSalle;
 	private String description;
 	private String titre;
-	String listParticipants;
-    public Email() {
-
-
-public class Email {
+	private String listParticipants;
+	
 
 
 
