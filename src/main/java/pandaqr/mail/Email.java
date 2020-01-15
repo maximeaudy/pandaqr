@@ -1,5 +1,7 @@
 package pandaqr.mail;
+
 import java.util.Date;
+
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -9,6 +11,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+
 
 import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
 
@@ -24,11 +27,11 @@ public class Email {
 	String listParticipants;
     public Email() {
 
-    }
 
-    /*
-     * @param args
-     */
+public class Email {
+
+
+
 /*    public static void main(String[] args) {
         try {
             Email email = new Email();
@@ -44,6 +47,7 @@ public class Email {
             String from = "pandaqr1@gmail.com";
             String to = "pandaqr1@gmail.com";
             String bcc = listParticipants;
+
             final String username = "pandaqr1@gmail.com";//change accordingly
             final String password = "Azerty11+";//change accordingly
             
@@ -68,6 +72,7 @@ public class Email {
 
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
             if (bcc.contains(";")) {
             	String[] dest ;
             	dest = bcc.split(";");
@@ -125,6 +130,7 @@ public class Email {
             messageBodyPart.setDataHandler(new DataHandler(
                     new ByteArrayDataSource(buffer.toString(), "text/calendar")));// very important
 
+
             BodyPart msgBodyPart = new MimeBodyPart();
 
             // Fill the message
@@ -136,7 +142,6 @@ public class Email {
             // Add part one
             multipart.addBodyPart(msgBodyPart);
 
-            
             // Add part one
             multipart.addBodyPart(messageBodyPart);
 
