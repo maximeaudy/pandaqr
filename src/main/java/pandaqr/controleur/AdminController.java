@@ -10,6 +10,7 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import pandaqr.service.RoomService;
 
 import javax.servlet.ServletException;
@@ -28,19 +29,21 @@ import java.util.List;
 import java.util.Locale;
 
 @Controller
+@RequestMapping("admin")
 public class AdminController {
     @Autowired
     private RoomService roomService;
 
-    @GetMapping({"/admin"})
+    @GetMapping("/")
     public String index(Model model) {
+
         model.addAttribute("rooms", roomService.getRooms());
         return "admin-index";
     }
-    @PostMapping({"/admin"})
-    protected void createPdf(HttpServletRequest request, HttpServletResponse response, @RequestParam("room-items") List<String> roomIds)
+    @PostMapping("/")
+    protected void createPdf(HttpServletRequest request, HttpServletResponse response, @RequestParam("room-items") List<String> roomIds, UriComponentsBuilder uriComponentsBuilder)
             throws ServletException, IOException {
-        ByteArrayOutputStream byteArrayOutputStream = (ByteArrayOutputStream) roomService.getPdf(roomIds);
+        ByteArrayOutputStream byteArrayOutputStream = (ByteArrayOutputStream) roomService.getPdf(roomIds, uriComponentsBuilder);
         // setting some response headers
         response.setHeader("Expires", "0");
         response.setHeader("Cache-Control",
@@ -56,14 +59,14 @@ public class AdminController {
         os.flush();
         os.close();
     }
-    @PostMapping("/admin/{id}")
+    @PostMapping("/{id}")
     public String infoByDate(@RequestParam("day") String day, @PathVariable String id, Model model) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", new Locale("fr", "FR"));
         model.addAttribute("room", roomService.findRoom(id, formatter.parse(day)));
         return "admin-room-info";
     }
 
-    @GetMapping({"/admin/{id}"})
+    @GetMapping("/{id}")
     public String index(Model model, @PathVariable String id) {
         model.addAttribute("room", roomService.findRoom(id));
         return "admin-room-info";

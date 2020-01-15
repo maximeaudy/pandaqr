@@ -20,8 +20,16 @@ public class RoomRepository {
     }
 
     public Room find(Long roomId) {
-        List<Room> rooms = this.em.createQuery("select r from Room r left join r.bookings where r.id = :id", Room.class)
+        List<Room> rooms = this.em.createQuery("select r from Room r left join r.bookings b where r.id = :id", Room.class)
                 .setParameter("id", roomId)
+                .getResultList();
+        if(rooms.size() == 0)
+            return null;
+        return rooms.get(0);
+    }
+    public Room find(String roomCode) {
+        List<Room> rooms = this.em.createQuery("select r from Room r where r.code = :roomCode", Room.class)
+                .setParameter("roomCode", roomCode)
                 .getResultList();
         if(rooms.size() == 0)
             return null;

@@ -14,12 +14,15 @@ import com.itextpdf.layout.property.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 import pandaqr.modele.Room;
 import pandaqr.repository.RoomRepository;
 
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,18 +36,17 @@ public class RoomService {
         return roomRepository.getRooms();
     }
 
-    public OutputStream getPdf(List<String> roomIds) throws FileNotFoundException, MalformedURLException {
+    public OutputStream getPdf(List<String> roomIds, UriComponentsBuilder uriComponentsBuilder) throws FileNotFoundException, MalformedURLException {
         List<Room> rooms = new ArrayList<>();
         for (String roomId: roomIds) {
             rooms.add(this.roomRepository.find(Long.parseLong(roomId)));
         }
-        return this.createPdf(rooms);
+        return this.createPdf(rooms, uriComponentsBuilder);
     }
 
-    private OutputStream createPdf(List<Room> rooms) throws FileNotFoundException, MalformedURLException {
+    private OutputStream createPdf(List<Room> rooms, UriComponentsBuilder uriBuilder) throws FileNotFoundException, MalformedURLException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PdfWriter writer = new PdfWriter(baos);
-
         // Creating a PdfDocument
         PdfDocument pdfDoc = new PdfDocument(writer);
 
@@ -60,8 +62,10 @@ public class RoomService {
             para.setBorder(new SolidBorder(3));
             String para1 = "Salle " + room.getCode();
             para.add(para1);
+
+            String uri = uriBuilder.toUriString() + "/booking/" + room.getCode();
             // Creating an ImageData object
-            String imFile = String.format("https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:8085/pandaqr?room=%d&size=100x100&color=c54f4f&format=jpg", room.getId());
+            String imFile = "https://api.qrserver.com/v1/create-qr-code/?data=" + uri + "&size=100x100&color=c54f4f&format=jpg";
             ImageData data = ImageDataFactory.create(imFile);
 
             // Creating an Image object
