@@ -26,6 +26,7 @@ public class Email {
 
 
 
+
 /*    public static void main(String[] args) {
         try {
             Email email = new Email();
@@ -35,7 +36,11 @@ public class Email {
         }
     }*/
 
-    public void send(String listParticipants, String titre, String description, String dateDebut,String dateFin,String mailOrganisateur,String numSalle)  {
+
+
+
+
+	public void send(String listParticipants, String titre, String description, String dateDebut,String dateFin,String mailOrganisateur,String numSalle)  {
 
         try {
             String from = "pandaqr1@gmail.com";
