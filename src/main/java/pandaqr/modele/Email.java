@@ -22,23 +22,6 @@ public class Email {
 	private String description;
 	private String titre;
 	private String listParticipants;
-	
-
-
-
-
-/*    public static void main(String[] args) {
-        try {
-            Email email = new Email();
-            email.send("maximed.ipod@gmail.com","nouvelle sieste", "je sens que cette sieste va être une pure soirée","20191213T163000Z","20191213T170000Zo","maximedelx@gmail.com",105);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
-
-
 
 	public void send(String listParticipants, String titre, String description, String dateDebut,String dateFin,String mailOrganisateur,String numSalle)  {
 
