@@ -1,5 +1,7 @@
 package pandaqr.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -16,9 +18,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-
-
-
+@Service
+public class EmailService {
 	public void send(BookingDto bookingDto, String mailOrganisateur, String numSalle) {
 		System.out.println(bookingDto.getStart_date() + "//" + bookingDto.getStart_time());
 		System.out.println(bookingDto.getEnd_date() + "//" + bookingDto.getEnd_time());
@@ -65,23 +66,13 @@ import javax.mail.util.ByteArrayDataSource;
 			message.setText("Bonjour,\n" + "vous êtes invité à une nouvelle réunion." + "Celle ci commence le "
 					+ bookingDto.getStart_date() + ". " + "Cordialement," + "PandaQR", "utf-8", "html");
 
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 
-			StringBuffer buffer = sb.append(
-					"BEGIN:VCALENDAR\n" + "PRODID:-//Microsoft Corporation//Outlook 9.0 MIMEDIR//EN\n" + "VERSION:2.0\n"
-							+ "METHOD:REQUEST\n" + "BEGIN:VEVENT\n" + "ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:"
-							+ bcc + "\n" + "ORGANIZER:MAILTO:" + mailOrganisateur + "\n" + "DTSTART:"
-							+ bookingDto.getStart_date() + "\n" + "DTEND:" + bookingDto.getStart_date() + "\n"
-							+ "LOCATION:SALLE " + numSalle + "\n" + "TRANSP:OPAQUE\n" + "SEQUENCE:0\n"
-							+ "UID:040000008200E00074C5B7101A82E00800000000002FF466CE3AC5010000000000000000100\n"
-							+ " 000004377FE5C37984842BF9440448399EB02\n" + "DTSTAMP:20051206T120102Z\n"
-							+ "CATEGORIES:Réunion\n" +
-							// description
-							"DESCRIPTION:" + bookingDto.getDescription() + "\n" +
-							// titre
-							"SUMMARY:" + bookingDto.getName() + "\n" + "PRIORITY:5\n" + "CLASS:PUBLIC\n"
-							+ "BEGIN:VALARM\n" + "TRIGGER:PT1440M\n" + "ACTION:DISPLAY\n" + "END:VALARM\n"
-							+ "END:VEVENT\n" + "END:VCALENDAR");
+			StringBuilder buffer = sb.append("BEGIN:VCALENDAR\n" + "PRODID:-//Microsoft Corporation//Outlook 9.0 MIMEDIR//EN\n" + "VERSION:2.0\n" + "METHOD:REQUEST\n" + "BEGIN:VEVENT\n" + "ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:").append(bcc).append("\n").append("ORGANIZER:MAILTO:").append(mailOrganisateur).append("\n").append("DTSTART:").append(bookingDto.getStart_date()).append("\n").append("DTEND:").append(bookingDto.getStart_date()).append("\n").append("LOCATION:SALLE ").append(numSalle).append("\n").append("TRANSP:OPAQUE\n").append("SEQUENCE:0\n").append("UID:040000008200E00074C5B7101A82E00800000000002FF466CE3AC5010000000000000000100\n").append(" 000004377FE5C37984842BF9440448399EB02\n").append("DTSTAMP:20051206T120102Z\n").append("CATEGORIES:Réunion\n").append(
+					// description
+					"DESCRIPTION:").append(bookingDto.getDescription()).append("\n").append(
+					// titre
+					"SUMMARY:").append(bookingDto.getName()).append("\n").append("PRIORITY:5\n").append("CLASS:PUBLIC\n").append("BEGIN:VALARM\n").append("TRIGGER:PT1440M\n").append("ACTION:DISPLAY\n").append("END:VALARM\n").append("END:VEVENT\n").append("END:VCALENDAR");
 
 			// Create the message part
 			BodyPart messageBodyPart = new MimeBodyPart();
@@ -91,7 +82,7 @@ import javax.mail.util.ByteArrayDataSource;
 			messageBodyPart.setHeader("Content-ID", "calendar_message");
 			messageBodyPart
 					.setDataHandler(new DataHandler(new ByteArrayDataSource(buffer.toString(), "text/calendar")));// very
-																													// important
+			// important
 
 			BodyPart msgBodyPart = new MimeBodyPart();
 
@@ -120,5 +111,6 @@ import javax.mail.util.ByteArrayDataSource;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	
+	}
+}
 

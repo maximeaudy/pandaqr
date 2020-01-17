@@ -24,7 +24,7 @@ public class BookingController {
 	@Autowired
 	private RoomService roomService;
 	
-	
+	@Autowired
 	private EmailService emailService;
 
 	@GetMapping({"/", "/rooms"})
