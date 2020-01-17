@@ -20,14 +20,14 @@ public class BookingRepository {
 	}
 
     public boolean bookingExist(Long roomId, Date start_time, Date end_time) {
-		List<Booking> bookings = this.em.createQuery("select b from Booking b left join b.room r where r.id = :id and b.start_time < :day and b.end_time > :day", Booking.class)
+		List<Booking> bookings = this.em.createQuery("select b from Booking b left join b.room r where r.id = :id and b.start_time <= :day and b.end_time >= :day", Booking.class)
 				.setParameter("id", roomId)
 				.setParameter("day", start_time)
 				.getResultList();
 		if(bookings.size() > 0)
 			return true;
 
-		bookings = this.em.createQuery("select b from Booking b left join b.room r where r.id = :id and b.start_time < :day and b.end_time > :day", Booking.class)
+		bookings = this.em.createQuery("select b from Booking b left join b.room r where r.id = :id and b.start_time <= :day and b.end_time >= :day", Booking.class)
 				.setParameter("id", roomId)
 				.setParameter("day", end_time)
 				.getResultList();
