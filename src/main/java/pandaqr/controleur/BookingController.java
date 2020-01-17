@@ -23,6 +23,9 @@ public class BookingController {
 
 	@Autowired
 	private RoomService roomService;
+	
+	
+	private EmailService emailService;
 
 	@GetMapping({"/", "/rooms"})
 	public String showRooms(Model model) {
@@ -46,8 +49,8 @@ public class BookingController {
 		try {
 			Booking booking = bookingService.book(bookingDto, email, roomCode);
 			model.addAttribute("booking", booking);
-			Email e = new Email();
-			e.send(bookingDto.getParticipants(),bookingDto.getName(),bookingDto.getDescription(),bookingDto.getStart_date()+bookingDto.getStart_time(),bookingDto.getEnd_date(),"pandaqr1@gmail.com",roomCode);
+
+			emailService.send(bookingDto,"pandaqr1@gmail.com",roomCode);
 			return "booking-summary";
 		} catch (FormatParticipantsEmailException | ParseException | DateNotFreeException e) {
 			bindingResult.addError(new FieldError("bookingDto", "participants", e.getMessage()));
