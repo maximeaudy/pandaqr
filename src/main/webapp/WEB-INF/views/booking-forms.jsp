@@ -7,9 +7,20 @@
 	<meta charset="ISO-8859-1">
 	<title>Formulaire de réservation</title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style type="text/css">
+		body{
+			background-color:#f1f1f1;
+		}
+
+		.container{
+			background-color:white;
+			min-height: 100vh;
+			padding-top:5%;
+		}
+	</style>
 </head>
 <body>
-<div class="container" style="width:60%;">
+<div class="container">
 	<div class="row">
 		<div class="col-12">
 			<h1>Formulaire de réservation</h1>
