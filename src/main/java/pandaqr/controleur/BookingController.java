@@ -27,7 +27,7 @@ public class BookingController {
 	@Autowired
 	private EmailService emailService;
 
-	@GetMapping({"/", "/rooms"})
+	@GetMapping("/rooms")
 	public String showRooms(Model model) {
 		model.addAttribute("rooms", roomService.getRooms());
 		return "booking-rooms";

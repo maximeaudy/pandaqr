@@ -22,9 +22,8 @@
 <body>
 <div class="container">
     <div class="col-md-12">
-        <h1>Bienvenue dans la pizzeria !</h1>
         <div>
-            <a href="<c:url value="/admin"/>">Administration</a><br>
+            <a href="<c:url value="/admin/"/>">Administration</a><br>
             <a href="<c:url value="/booking"/>">Réserver une salle</a>
         </div>
     </div>
